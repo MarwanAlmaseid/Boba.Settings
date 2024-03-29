@@ -5,17 +5,17 @@ VisualStudioVersion = 17.10.34607.79
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B950EF30-9A08-4C19-B9EB-9198F786E2B0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings", "Boba.Settings\Boba.Settings.csproj", "{46237E1C-7F1B-43F9-A5A4-5283893E7210}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{1410AD17-7A9B-419E-ADF1-79DB391888BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A86C809E-87DF-4A22-90C6-15D048415FCF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings.EntityFrameworkCore", "Boba.Settings.EntityFrameworkCore\Boba.Settings.EntityFrameworkCore.csproj", "{CEDE790F-133E-4437-AC43-E3AE5E579B30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings", "src\Boba.Settings\Boba.Settings.csproj", "{59DE7665-8F41-4096-99CE-4F4DEE99E69B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings.EntityFrameworkCore.SqlServer", "Boba.Settings.EntityFrameworkCore.SqlServer\Boba.Settings.EntityFrameworkCore.SqlServer.csproj", "{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings.EntityFrameworkCore", "src\Boba.Settings.EntityFrameworkCore\Boba.Settings.EntityFrameworkCore.csproj", "{A0E01097-D2BC-4DAE-9901-7C1F3578B9D2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings.EntityFrameworkCore.SqlServer.WebApp", "Boba.Settings.EntityFrameworkCore.SqlServer.WebApp\Boba.Settings.EntityFrameworkCore.SqlServer.WebApp.csproj", "{ABE94021-B942-40F8-B2F6-775652268300}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings.EntityFrameworkCore.SqlServer", "src\Boba.Settings.EntityFrameworkCore.SqlServer\Boba.Settings.EntityFrameworkCore.SqlServer.csproj", "{C84748BF-FB0B-4AB3-B357-E08D8673F4F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings.EntityFrameworkCore.SqlServer.WebApp", "samples\Boba.Settings.EntityFrameworkCore.SqlServer.WebApp\Boba.Settings.EntityFrameworkCore.SqlServer.WebApp.csproj", "{5D8EA32E-DBA9-45F8-A2A2-0BB841C3754B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,31 +23,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{46237E1C-7F1B-43F9-A5A4-5283893E7210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46237E1C-7F1B-43F9-A5A4-5283893E7210}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46237E1C-7F1B-43F9-A5A4-5283893E7210}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46237E1C-7F1B-43F9-A5A4-5283893E7210}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CEDE790F-133E-4437-AC43-E3AE5E579B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CEDE790F-133E-4437-AC43-E3AE5E579B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CEDE790F-133E-4437-AC43-E3AE5E579B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CEDE790F-133E-4437-AC43-E3AE5E579B30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ABE94021-B942-40F8-B2F6-775652268300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABE94021-B942-40F8-B2F6-775652268300}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABE94021-B942-40F8-B2F6-775652268300}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABE94021-B942-40F8-B2F6-775652268300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59DE7665-8F41-4096-99CE-4F4DEE99E69B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59DE7665-8F41-4096-99CE-4F4DEE99E69B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59DE7665-8F41-4096-99CE-4F4DEE99E69B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59DE7665-8F41-4096-99CE-4F4DEE99E69B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0E01097-D2BC-4DAE-9901-7C1F3578B9D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E01097-D2BC-4DAE-9901-7C1F3578B9D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E01097-D2BC-4DAE-9901-7C1F3578B9D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E01097-D2BC-4DAE-9901-7C1F3578B9D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C84748BF-FB0B-4AB3-B357-E08D8673F4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C84748BF-FB0B-4AB3-B357-E08D8673F4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C84748BF-FB0B-4AB3-B357-E08D8673F4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C84748BF-FB0B-4AB3-B357-E08D8673F4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D8EA32E-DBA9-45F8-A2A2-0BB841C3754B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D8EA32E-DBA9-45F8-A2A2-0BB841C3754B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D8EA32E-DBA9-45F8-A2A2-0BB841C3754B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D8EA32E-DBA9-45F8-A2A2-0BB841C3754B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{46237E1C-7F1B-43F9-A5A4-5283893E7210} = {B950EF30-9A08-4C19-B9EB-9198F786E2B0}
-		{CEDE790F-133E-4437-AC43-E3AE5E579B30} = {B950EF30-9A08-4C19-B9EB-9198F786E2B0}
-		{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A} = {B950EF30-9A08-4C19-B9EB-9198F786E2B0}
-		{ABE94021-B942-40F8-B2F6-775652268300} = {1410AD17-7A9B-419E-ADF1-79DB391888BC}
+		{59DE7665-8F41-4096-99CE-4F4DEE99E69B} = {B950EF30-9A08-4C19-B9EB-9198F786E2B0}
+		{A0E01097-D2BC-4DAE-9901-7C1F3578B9D2} = {B950EF30-9A08-4C19-B9EB-9198F786E2B0}
+		{C84748BF-FB0B-4AB3-B357-E08D8673F4F8} = {B950EF30-9A08-4C19-B9EB-9198F786E2B0}
+		{5D8EA32E-DBA9-45F8-A2A2-0BB841C3754B} = {1410AD17-7A9B-419E-ADF1-79DB391888BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3540CAE3-F72A-4751-A5AB-92122B01A35F}
