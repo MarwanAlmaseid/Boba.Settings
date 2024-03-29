@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34607.79
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B950EF30-9A08-4C19-B9EB-9198F786E2B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings", "Boba.Settings\Boba.Settings.csproj", "{46237E1C-7F1B-43F9-A5A4-5283893E7210}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{1410AD17-7A9B-419E-ADF1-79DB391888BC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A86C809E-87DF-4A22-90C6-15D048415FCF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings.EntityFrameworkCore", "Boba.Settings.EntityFrameworkCore\Boba.Settings.EntityFrameworkCore.csproj", "{CEDE790F-133E-4437-AC43-E3AE5E579B30}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings.EntityFrameworkCore.SqlServer", "Boba.Settings.EntityFrameworkCore.SqlServer\Boba.Settings.EntityFrameworkCore.SqlServer.csproj", "{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings.EntityFrameworkCore.SqlServer.WebApp", "Boba.Settings.EntityFrameworkCore.SqlServer.WebApp\Boba.Settings.EntityFrameworkCore.SqlServer.WebApp.csproj", "{ABE94021-B942-40F8-B2F6-775652268300}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46237E1C-7F1B-43F9-A5A4-5283893E7210}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46237E1C-7F1B-43F9-A5A4-5283893E7210}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46237E1C-7F1B-43F9-A5A4-5283893E7210}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46237E1C-7F1B-43F9-A5A4-5283893E7210}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEDE790F-133E-4437-AC43-E3AE5E579B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEDE790F-133E-4437-AC43-E3AE5E579B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEDE790F-133E-4437-AC43-E3AE5E579B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEDE790F-133E-4437-AC43-E3AE5E579B30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABE94021-B942-40F8-B2F6-775652268300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABE94021-B942-40F8-B2F6-775652268300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABE94021-B942-40F8-B2F6-775652268300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABE94021-B942-40F8-B2F6-775652268300}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{46237E1C-7F1B-43F9-A5A4-5283893E7210} = {B950EF30-9A08-4C19-B9EB-9198F786E2B0}
+		{CEDE790F-133E-4437-AC43-E3AE5E579B30} = {B950EF30-9A08-4C19-B9EB-9198F786E2B0}
+		{EC6AC64F-3DB4-453F-88A2-88A1AAC1337A} = {B950EF30-9A08-4C19-B9EB-9198F786E2B0}
+		{ABE94021-B942-40F8-B2F6-775652268300} = {1410AD17-7A9B-419E-ADF1-79DB391888BC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3540CAE3-F72A-4751-A5AB-92122B01A35F}
+	EndGlobalSection
+EndGlobal
