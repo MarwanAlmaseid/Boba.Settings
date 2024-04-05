@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Boba.Settings.EntityFrameworkCore.SqlServer;
+namespace Boba.Settings.EntityFrameworkCore;
 
 /// <summary>
 /// Entity type configuration for setting.

@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <table>
+        <thead>
+            <tr><td>Name</td><td>Value</td></tr>
+        </thead>
+        <tbody>
+            <tr><td>@(nameof(Model.DefaultColor))</td><td>@(Model.DefaultColor)</td></tr>
+            <tr><td>@(nameof(Model.DefaultLangId))</td><td>@(Model.DefaultLangId)</td></tr>
+            <tr><td>@(nameof(Model.Enabled))</td><td>@(Model.Enabled)</td></tr>
+        </tbody>
+    </table>
+
+    <a href="home/create">Save values</a>
+</div>

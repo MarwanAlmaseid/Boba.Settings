@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace Boba.Settings.EntityFrameworkCore.SqlServer;
+namespace Boba.Settings.EntityFrameworkCore;
 
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
