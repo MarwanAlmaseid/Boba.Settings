@@ -1,4 +1,4 @@
-﻿namespace Boba.Settings.EntityFrameworkCore.SqlServer;
+﻿namespace Boba.Settings.EntityFrameworkCore;
 
 /// <summary>
 /// Contains constant values used throughout the application.

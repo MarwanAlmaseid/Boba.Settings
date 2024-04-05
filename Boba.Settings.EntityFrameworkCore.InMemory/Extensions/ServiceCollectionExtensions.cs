@@ -1,8 +1,7 @@
 ﻿using Boba.Settings.EntityFrameworkCore;
-using Boba.Settings.EntityFrameworkCore.SqlServer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 
 namespace Boba.Settings;
 
@@ -15,19 +14,16 @@ namespace Boba.Settings;
 /// <exception cref="ArgumentNullException">Thrown when the connection string is null.</exception>
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection UserSqlServer(this IServiceCollection services, [NotNull] string connectionString)
-    {
-        if (connectionString is null)
-        {
-            throw new ArgumentNullException("connectionString");
-        }
+    const string defaultDBName = "BobaSettingsDB";
 
+    public static IServiceCollection UseInMemory(this IServiceCollection services, string? dbName = defaultDBName)
+    {
         services.UseEFCore();
 
-        services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-
-        // Install SQL Server specific objects
-        SqlServerObjectsInstaller.Install(connectionString);
+        services.AddDbContext<ApplicationDbContext>(option =>
+        {
+            option.UseInMemoryDatabase(dbName ?? defaultDBName);
+        });
 
         return services;
     }
