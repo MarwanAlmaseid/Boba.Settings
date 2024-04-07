@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Boba.Settings.EntityFrameworkCore.InMemory\Boba.Settings.EntityFrameworkCore.InMemory.csproj" />
+    <ProjectReference Include="..\..\src\Boba.Settings.EntityFrameworkCore.InMemory\Boba.Settings.EntityFrameworkCore.InMemory.csproj" />
   </ItemGroup>
 
 </Project>
