@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings.EntityFramewo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boba.Settings.EntityFrameworkCore.InMemory.WebApp", "samples\Boba.Settings.EntityFrameworkCore.InMemory.WebApp\Boba.Settings.EntityFrameworkCore.InMemory.WebApp.csproj", "{5F4684BC-ABCE-4D8A-8903-4E3AD86F2A08}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boba.Settings.Tests", "tests\Boba.Settings.Tests\Boba.Settings.Tests.csproj", "{EA4736FB-539E-48F0-8E94-E41F4DEBEA77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5F4684BC-ABCE-4D8A-8903-4E3AD86F2A08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F4684BC-ABCE-4D8A-8903-4E3AD86F2A08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F4684BC-ABCE-4D8A-8903-4E3AD86F2A08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA4736FB-539E-48F0-8E94-E41F4DEBEA77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA4736FB-539E-48F0-8E94-E41F4DEBEA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA4736FB-539E-48F0-8E94-E41F4DEBEA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA4736FB-539E-48F0-8E94-E41F4DEBEA77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{5D8EA32E-DBA9-45F8-A2A2-0BB841C3754B} = {1410AD17-7A9B-419E-ADF1-79DB391888BC}
 		{1748E5D8-378E-4359-B190-8879B4353CDA} = {B950EF30-9A08-4C19-B9EB-9198F786E2B0}
 		{5F4684BC-ABCE-4D8A-8903-4E3AD86F2A08} = {1410AD17-7A9B-419E-ADF1-79DB391888BC}
+		{EA4736FB-539E-48F0-8E94-E41F4DEBEA77} = {A86C809E-87DF-4A22-90C6-15D048415FCF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3540CAE3-F72A-4751-A5AB-92122B01A35F}

@@ -14,7 +14,8 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// <returns>The list of all settings.</returns>
     public virtual async Task<IList<Setting>> GetAllSettingsAsync()
     {
-        var settings = await _settingRepository.GetAllAsync();
+        var settings = await _settingRepository.GetAllAsync()
+            ?? new List<Setting>();
 
         return settings;
     }

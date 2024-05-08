@@ -5,7 +5,7 @@ namespace Boba.Settings;
 /// <summary>
 /// Helper class for finding types in the current AppDomain.
 /// </summary>
-internal class AppDomainTypeFinder
+public class AppDomainTypeFinder
 {
     /// <summary>
     /// Finds classes assignable to the specified type in the current AppDomain.

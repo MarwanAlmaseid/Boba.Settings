@@ -6,7 +6,7 @@ namespace Boba.Settings;
 /// <summary>
 /// Helper class providing common conversion methods.
 /// </summary>
-internal class CommonHelper
+public class CommonHelper
 {
     /// <summary>
     /// Converts the specified value to the specified type.
