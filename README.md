@@ -10,7 +10,6 @@ Boba.Settings is a comprehensive C# library meticulously crafted to streamline t
 Boba.Settings is conveniently available on NuGet. Simply install the provider package corresponding to your target database.
 
 ```c#
-dotnet add package Boba.Settings
 dotnet add package Boba.Settings.EntityFrameworkCore.SqlServer
 ```
 
@@ -107,7 +106,7 @@ Please adhere to this project's `code of conduct`.
 - Support for various DB stores such as MangoDb, In Memory, Sql Light, CozmoDB.
 - Integration with app setting configurations.
 - Association of settings with entities like UserId, StoreId, etc.
-
+- Setting version
 ### Versions
 The main branch is now on .NET 8.0. Previous versions are not available at this time.
 
