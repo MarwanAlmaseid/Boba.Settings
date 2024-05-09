@@ -4,7 +4,26 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageIcon>Boba.Settings.jpeg</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>Settings, Configurations, Options, App settings, Asp.net core, Entity Framework, EntityFrameworkCore, EFCore, InMemory, MsSql Server</PackageTags>
+    <Title>Boba.Settings</Title>
+    <Description>Simplify application and business settings management.</Description>
+    <RepositoryUrl>https://github.com/MarwanAlmaseid/Boba.Settings</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\Boba.Settings.jpeg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.3" />
@@ -12,6 +31,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Boba.Settings.EntityFrameworkCore\Boba.Settings.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

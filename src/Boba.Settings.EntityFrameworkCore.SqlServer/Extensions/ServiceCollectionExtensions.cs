@@ -15,7 +15,7 @@ namespace Boba.Settings;
 /// <exception cref="ArgumentNullException">Thrown when the connection string is null.</exception>
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection UserSqlServer(this IServiceCollection services, [NotNull] string connectionString)
+    public static IServiceCollection UseSqlServer(this IServiceCollection services, [NotNull] string connectionString)
     {
         if (connectionString is null)
         {

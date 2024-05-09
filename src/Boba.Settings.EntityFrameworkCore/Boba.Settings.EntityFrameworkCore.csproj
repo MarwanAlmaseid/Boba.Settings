@@ -6,24 +6,21 @@
     <Nullable>enable</Nullable>
     <Title>Boba.Settings</Title>
     <Description>Simplify application and business settings management.</Description>
-    <PackageIcon>Boba Settings.png</PackageIcon>
+    <PackageIcon>Boba.Settings.jpeg</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/MarwanAlmaseid/Boba.Settings</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Settings, Configurations, App settings, Asp.net core, Entity Framework, EntityFrameworkCore, EFCore</PackageTags>
+    <PackageTags>Settings, Configurations, Options, App settings, Asp.net core, Entity Framework, EntityFrameworkCore, EFCore, InMemory, MsSql Server</PackageTags>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\..\..\Desktop\Boba Settings.png">
+    <None Include="..\..\Boba.Settings.jpeg">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
     <None Include="..\..\LICENSE.txt">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Include="..\..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
@@ -36,6 +33,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Boba.Settings\Boba.Settings.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
