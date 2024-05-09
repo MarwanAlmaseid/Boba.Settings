@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 var connectionString = builder.Configuration.GetConnectionString("ConnectionString");
-builder.Services.AddBobaSettings().UserSqlServer(connectionString);
+builder.Services.AddBobaSettings().UseSqlServer(connectionString);
 
 var app = builder.Build();
 
