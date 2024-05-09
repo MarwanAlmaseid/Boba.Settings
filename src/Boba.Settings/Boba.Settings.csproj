@@ -11,8 +11,9 @@
     <RepositoryType>git</RepositoryType>
     <Title>Boba.Settings</Title>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>Settings, Configurations, App settings, Asp.net core, Entity Framework, EntityFrameworkCore, EFCore</PackageTags>
+    <PackageTags>Settings, Configurations, Options, App settings, Asp.net core, Entity Framework, EntityFrameworkCore, EFCore, InMemory, MsSql Server</PackageTags>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

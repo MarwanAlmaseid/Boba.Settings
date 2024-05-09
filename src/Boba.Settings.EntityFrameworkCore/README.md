@@ -1,5 +1,5 @@
 
-# Boba.Settings
+# Boba.Settings (EF)
 
 Boba.Settings is a comprehensive C# library meticulously crafted to streamline the management of application and business settings within projects. Offering a suite of robust functionalities, it empowers developers to efficiently organize and access crucial configurations, thereby enhancing development workflows and ensuring seamless integration of settings across various facets of the application.
 

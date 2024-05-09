@@ -1,5 +1,5 @@
 
-# Boba.Settings
+# Boba.Settings (EF InMemory)
 
 Boba.Settings is a comprehensive C# library meticulously crafted to streamline the management of application and business settings within projects. Offering a suite of robust functionalities, it empowers developers to efficiently organize and access crucial configurations, thereby enhancing development workflows and ensuring seamless integration of settings across various facets of the application.
 
@@ -7,12 +7,11 @@ Boba.Settings is a comprehensive C# library meticulously crafted to streamline t
 
 ### Installation
 
-Boba.Settings is conveniently available on NuGet. Simply install the provider package corresponding to your database.
+Boba.Settings is conveniently available on NuGet. Simply install the provider package corresponding to your in memeory database.
 
-Choose your data store option and follow its documentation to install the right package.
-- Sql Server: [Boba.Settings.EntityFrameworkCore.SqlServer](https://github.com/MarwanAlmaseid/Boba.Settings/tree/master/src/Boba.Settings.EntityFrameworkCore.SqlServer)
-- In Memeory: [Boba.Settings.EntityFrameworkCore.InMemory](https://github.com/MarwanAlmaseid/Boba.Settings/tree/master/src/Boba.Settings.EntityFrameworkCore.InMemory)
-
+```c#
+dotnet add package Boba.Settings.EntityFrameworkCore.InMemory
+```
 
 Utilize the `--version` option to specify a preview version for installation if needed.
 
@@ -20,9 +19,9 @@ Utilize the `--version` option to specify a preview version for installation if 
 Harnessing the power of Boba.Settings is straightforward. Follow these steps to get started:
 
 #### Registration: 
-Begin by registering Boba.Settings in your `program.cs`. Presently, we support Sql server, InMemeory, Alternative data store providers are also available.
+Begin by registering Boba.Settings in your `program.cs`. Presently, we support InMemeory, Alternative data store providers are also available.
 ```c#
-builder.Services.AddBobaSettings();
+builder.Services.AddBobaSettings().UseInMemory();
 ```
 #### Configuration:
 Define your settings class, inheriting from `ISettings`. Here, you can optionally assign default values to be retrieved in the absence of stored data.
