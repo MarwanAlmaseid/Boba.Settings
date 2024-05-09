@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\..\..\Desktop\Boba.Settings.jpeg">
+    <None Include="..\..\Boba.Settings.jpeg">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>

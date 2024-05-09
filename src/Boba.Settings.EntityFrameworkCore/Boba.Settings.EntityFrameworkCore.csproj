@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <Title>Boba.Settings</Title>
     <Description>Simplify application and business settings management.</Description>
-    <PackageIcon>Boba Settings.png</PackageIcon>
+    <PackageIcon>Boba.Settings.jpeg</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/MarwanAlmaseid/Boba.Settings</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\..\..\Desktop\Boba Settings.png">
+    <None Include="..\..\Boba.Settings.jpeg">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
