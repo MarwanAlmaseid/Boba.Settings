@@ -1,21 +1,66 @@
-﻿using System.ComponentModel;
+﻿using Boba.Settings.Models;
+using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Boba.Settings;
 
+/// <summary>
+/// Provides methods to manage settings.
+/// </summary>
 public class SettingService(ISettingRepository settingRepository) : ISettingService
 {
     private readonly ISettingRepository _settingRepository = settingRepository;
 
-    /// <summary>
-    /// Retrieves all settings asynchronously.
-    /// </summary>
-    /// <returns>The list of all settings.</returns>
     public virtual async Task<IList<Setting>> GetAllSettingsAsync()
     {
         var settings = await _settingRepository.GetAllAsync()
             ?? new List<Setting>();
+        return settings;
+    }
+
+    public virtual async Task<IList<SettingDto>> GetAllRegisteredSettingsAsync()
+    {
+        var settings = new List<SettingDto>();
+
+        var storedSettings = await _settingRepository.GetAllAsync()
+            ?? new List<Setting>();
+
+        var appDomain = new AppDomainTypeFinder();
+        var allSettingsType = appDomain.FindClassesOfType(typeof(ISettings), true).ToList();
+
+
+        foreach (var type in allSettingsType)
+        {
+            var groupName = type.Name;
+
+            // Get all properties of the type
+            var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (var prop in properties)
+            {
+                var fullName = $"{groupName.ToLower()}.{prop.Name.ToLower()}";
+
+                var setting = new SettingDto
+                {
+                    GroupName = groupName,
+                    Name = prop.Name,
+                    FullName = fullName,
+                    Type = prop.PropertyType.Name,
+                    DefaultValue = prop.GetValue(Activator.CreateInstance(type))?.ToString() ?? "null"
+                };
+
+                var storedSetting = storedSettings.FirstOrDefault(c => c.Name == fullName);
+
+                if (storedSetting is not null)
+                {
+                    setting.Id = storedSetting.Id;
+                    setting.Value = storedSetting.Value;
+                }
+
+                settings.Add(setting);
+            }
+        }
 
         return settings;
     }
