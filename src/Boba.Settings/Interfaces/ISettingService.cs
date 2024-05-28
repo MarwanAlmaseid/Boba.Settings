@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Boba.Settings.Models;
+using System.Linq.Expressions;
 
 namespace Boba.Settings;
 
@@ -9,6 +10,12 @@ public interface ISettingService
     /// </summary>
     /// <returns>The list of all settings.</returns>
     Task<IList<Setting>> GetAllSettingsAsync();
+
+    /// <summary>
+    /// Gets all registered settings asynchronously.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a list of settings.</returns>
+    Task<IList<SettingDto>> GetAllRegisteredSettingsAsync();
 
     /// <summary>
     /// Retrieves a setting by its ID asynchronously.
