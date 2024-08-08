@@ -12,7 +12,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>Settings, Configurations, Options, App settings, Asp.net core, Entity Framework, EntityFrameworkCore, EFCore, InMemory, MsSql Server</PackageTags>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Boba.Settings" Version="1.0.1" />
+    <PackageReference Include="Boba.Settings" Version="1.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
   </ItemGroup>
