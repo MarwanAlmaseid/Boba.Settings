@@ -37,7 +37,10 @@ public class AppDomainTypeFinderTests
         var typeFinder = new AppDomainTypeFinder();
 
         // Act
-        var result = typeFinder.FindClassesOfType(typeof(AbstractSampleClass), onlyConcreteClasses: false);
+        var result = typeFinder.FindClassesOfType(
+            typeof(AbstractSampleClass),
+            onlyConcreteClasses: false
+        );
 
         // Assert
         result.Should().Contain(typeof(AbstractSampleClass));

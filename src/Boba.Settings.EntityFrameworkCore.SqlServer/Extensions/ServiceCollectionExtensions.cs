@@ -15,7 +15,10 @@ namespace Boba.Settings;
 /// <exception cref="ArgumentNullException">Thrown when the connection string is null.</exception>
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection UseSqlServer(this IServiceCollection services, [NotNull] string connectionString)
+    public static IServiceCollection UseSqlServer(
+        this IServiceCollection services,
+        [NotNull] string connectionString
+    )
     {
         if (connectionString is null)
         {
@@ -24,7 +27,9 @@ public static class ServiceCollectionExtensions
 
         services.UseEFCore();
 
-        services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(connectionString)
+        );
 
         // Install SQL Server specific objects
         SqlServerObjectsInstaller.Install(connectionString);

@@ -5,7 +5,8 @@ namespace Boba.Settings.EntityFrameworkCore;
 
 public class BobaApplicationDbContext : DbContext, IBobaApplicationDbContext
 {
-    public BobaApplicationDbContext(DbContextOptions<BobaApplicationDbContext> options) : base(options) { }
+    public BobaApplicationDbContext(DbContextOptions<BobaApplicationDbContext> options)
+        : base(options) { }
 
     public DbSet<Setting> Settings { get; set; }
 

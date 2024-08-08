@@ -14,6 +14,10 @@ public class BobaSettingConfiguration : IEntityTypeConfiguration<Setting>
 
         builder.HasKey(x => x.Id);
         builder.Property(e => e.Name).HasMaxLength(512).IsRequired();
-        builder.Property(e => e.Value).HasMaxLength(int.MaxValue).HasDefaultValue(string.Empty).IsRequired(false);
+        builder
+            .Property(e => e.Value)
+            .HasMaxLength(int.MaxValue)
+            .HasDefaultValue(string.Empty)
+            .IsRequired(false);
     }
 }

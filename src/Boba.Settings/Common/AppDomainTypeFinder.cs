@@ -33,9 +33,13 @@ public class AppDomainTypeFinder
 
             if (types != null)
             {
-                allTypes.AddRange(types.Where(x => x != null &&
-                    assignTypeFrom.IsAssignableFrom(x) &&
-                    (onlyConcreteClasses ? x.IsClass && !x.IsAbstract : true)));
+                allTypes.AddRange(
+                    types.Where(x =>
+                        x != null
+                        && assignTypeFrom.IsAssignableFrom(x)
+                        && (onlyConcreteClasses ? x.IsClass && !x.IsAbstract : true)
+                    )
+                );
             }
         }
 

@@ -51,14 +51,19 @@ public interface IBobaSettingService
     /// <param name="keySelector">Expression specifying the property for which to get the key.</param>
     /// <returns>The key corresponding to the specified property.</returns>
     /// <exception cref="ArgumentException">Thrown when the expression does not refer to a property.</exception>
-    string GetSettingKey<TSettings, T>(TSettings settings, Expression<Func<TSettings, T>> keySelector) where TSettings : IBobaSettings, new();
+    string GetSettingKey<TSettings, T>(
+        TSettings settings,
+        Expression<Func<TSettings, T>> keySelector
+    )
+        where TSettings : IBobaSettings, new();
 
     /// <summary>
     /// Loads settings of the specified type asynchronously.
     /// </summary>
     /// <typeparam name="T">The type of settings to load, must implement <see cref="IBobaSettings"/> and have a parameterless constructor.</typeparam>
     /// <returns>The loaded settings.</returns>
-    Task<T> LoadSettingAsync<T>() where T : IBobaSettings, new();
+    Task<T> LoadSettingAsync<T>()
+        where T : IBobaSettings, new();
 
     /// <summary>
     /// Loads settings of the specified type asynchronously.
@@ -75,7 +80,8 @@ public interface IBobaSettingService
     /// <remarks>
     /// This method iterates through the properties of the specified settings object, converts their values to strings, and saves them as key-value pairs.
     /// </remarks>
-    Task SaveSettingAsync<T>(T settings) where T : IBobaSettings, new();
+    Task SaveSettingAsync<T>(T settings)
+        where T : IBobaSettings, new();
 
     /// <summary>
     /// Saves the specified setting asynchronously.
@@ -85,7 +91,8 @@ public interface IBobaSettingService
     /// <param name="settings">The settings instance.</param>
     /// <param name="keySelector">Expression specifying the property to save.</param>
     /// <exception cref="ArgumentException">Thrown when the expression does not refer to a property.</exception>
-    Task SaveSettingAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : IBobaSettings, new();
+    Task SaveSettingAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector)
+        where T : IBobaSettings, new();
 
     /// <summary>
     /// Sets the specified setting asynchronously.
@@ -127,7 +134,8 @@ public interface IBobaSettingService
     /// <remarks>
     /// This method deletes all settings whose keys correspond to properties of the specified type.
     /// </remarks>
-    Task DeleteSettingAsync<T>() where T : IBobaSettings, new();
+    Task DeleteSettingAsync<T>()
+        where T : IBobaSettings, new();
 
     /// <summary>
     /// Deletes the specified setting asynchronously.
@@ -136,7 +144,8 @@ public interface IBobaSettingService
     /// <typeparam name="TPropType">The type of the property representing the setting.</typeparam>
     /// <param name="settings">The settings instance.</param>
     /// <param name="keySelector">Expression specifying the property of the setting to delete.</param>
-    Task DeleteSettingAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : IBobaSettings, new();
+    Task DeleteSettingAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector)
+        where T : IBobaSettings, new();
 
     /// <summary>
     /// Checks if the specified setting exists asynchronously.
@@ -146,5 +155,9 @@ public interface IBobaSettingService
     /// <param name="settings">The settings instance.</param>
     /// <param name="keySelector">Expression specifying the property of the setting to check.</param>
     /// <returns>True if the setting exists; otherwise, false.</returns>
-    Task<bool> SettingExistsAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : IBobaSettings, new();
+    Task<bool> SettingExistsAsync<T, TPropType>(
+        T settings,
+        Expression<Func<T, TPropType>> keySelector
+    )
+        where T : IBobaSettings, new();
 }

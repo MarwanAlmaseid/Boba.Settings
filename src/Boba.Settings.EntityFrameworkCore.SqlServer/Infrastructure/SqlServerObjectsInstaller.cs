@@ -26,7 +26,8 @@ internal static class SqlServerObjectsInstaller
     /// <exception cref="ArgumentNullException">Thrown when the connection string is null.</exception>
     public static void Install(string connectionString, string schema)
     {
-        if (connectionString == null) throw new ArgumentNullException(nameof(connectionString));
+        if (connectionString == null)
+            throw new ArgumentNullException(nameof(connectionString));
 
         using var connection = new SqlConnection(connectionString);
         var script = GetInstallScript(schema);
@@ -48,7 +49,10 @@ internal static class SqlServerObjectsInstaller
         var filePath = string.Format("{0}.Install.sql", assembly.GetName().Name);
         var script = GetStringResource(assembly, filePath);
 
-        script = script.Replace("$(BobaSchema)", !string.IsNullOrWhiteSpace(schema) ? schema : Constants.SchemaName);
+        script = script.Replace(
+            "$(BobaSchema)",
+            !string.IsNullOrWhiteSpace(schema) ? schema : Constants.SchemaName
+        );
 
         return script;
     }
@@ -61,18 +65,15 @@ internal static class SqlServerObjectsInstaller
     /// <returns>The content of the embedded resource as a string.</returns>
     private static string GetStringResource(Assembly assembly, string resourceName)
     {
-        using (var stream = assembly.GetManifestResourceStream(resourceName))
+        using var stream = assembly.GetManifestResourceStream(resourceName);
+        if (stream == null)
         {
-            if (stream == null)
-            {
-                throw new InvalidOperationException(
-                    $"Requested resource `{resourceName}` was not found in the assembly `{assembly}`.");
-            }
-
-            using (var reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
+            throw new InvalidOperationException(
+                $"Requested resource `{resourceName}` was not found in the assembly `{assembly}`."
+            );
         }
+
+        using var reader = new StreamReader(stream);
+        return reader.ReadToEnd();
     }
 }

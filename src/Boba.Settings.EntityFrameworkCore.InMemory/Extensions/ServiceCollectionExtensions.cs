@@ -15,7 +15,10 @@ public static class ServiceCollectionExtensions
 {
     const string defaultDBName = "BobaSettingsDB";
 
-    public static IServiceCollection UseInMemory(this IServiceCollection services, string? dbName = defaultDBName)
+    public static IServiceCollection UseInMemory(
+        this IServiceCollection services,
+        string? dbName = defaultDBName
+    )
     {
         services.UseEFCore();
 

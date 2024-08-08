@@ -34,7 +34,9 @@ public class SettingServiceTests
     public async Task GetAllSettingsAsync_ShouldReturnEmptyList_WhenRepositoryIsEmpty()
     {
         // Arrange
-        _mockSettingRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync(new List<BobaSetting>());
+        _mockSettingRepository
+            .Setup(repo => repo.GetAllAsync())
+            .ReturnsAsync(new List<BobaSetting>());
 
         var settingService = new BobaSettingService(_mockSettingRepository.Object);
 
@@ -49,7 +51,9 @@ public class SettingServiceTests
     public async Task GetAllSettingsAsync_ShouldReturnEmptyList_WhenRepositoryIsNull()
     {
         // Arrange
-        _mockSettingRepository.Setup(repo => repo.GetAllAsync()).ReturnsAsync((List<BobaSetting>)null);
+        _mockSettingRepository
+            .Setup(repo => repo.GetAllAsync())
+            .ReturnsAsync((List<BobaSetting>)null);
 
         var settingService = new BobaSettingService(_mockSettingRepository.Object);
 
@@ -64,7 +68,9 @@ public class SettingServiceTests
     public async Task GetAllSettingsAsync_ShouldHandleException_WhenRepositoryThrowsException()
     {
         // Arrange
-        _mockSettingRepository.Setup(repo => repo.GetAllAsync()).ThrowsAsync(new Exception("Repository exception"));
+        _mockSettingRepository
+            .Setup(repo => repo.GetAllAsync())
+            .ThrowsAsync(new Exception("Repository exception"));
 
         var settingService = new BobaSettingService(_mockSettingRepository.Object);
 
@@ -82,9 +88,16 @@ public class SettingServiceTests
     {
         // Arrange
         int settingId = 1;
-        var expectedSetting = new BobaSetting { Id = settingId, Name = "Setting 1", Value = "Value 1" };
+        var expectedSetting = new BobaSetting
+        {
+            Id = settingId,
+            Name = "Setting 1",
+            Value = "Value 1"
+        };
 
-        _mockSettingRepository.Setup(repo => repo.GetByIdAsync(settingId)).ReturnsAsync(expectedSetting);
+        _mockSettingRepository
+            .Setup(repo => repo.GetByIdAsync(settingId))
+            .ReturnsAsync(expectedSetting);
 
         var settingService = new BobaSettingService(_mockSettingRepository.Object);
 
@@ -101,7 +114,9 @@ public class SettingServiceTests
         // Arrange
         int settingId = 1;
 
-        _mockSettingRepository.Setup(repo => repo.GetByIdAsync(settingId)).ReturnsAsync((BobaSetting)null);
+        _mockSettingRepository
+            .Setup(repo => repo.GetByIdAsync(settingId))
+            .ReturnsAsync((BobaSetting)null);
 
         var settingService = new BobaSettingService(_mockSettingRepository.Object);
 
@@ -118,7 +133,9 @@ public class SettingServiceTests
         // Arrange
         int settingId = 1;
 
-        _mockSettingRepository.Setup(repo => repo.GetByIdAsync(settingId)).ThrowsAsync(new Exception("Repository exception"));
+        _mockSettingRepository
+            .Setup(repo => repo.GetByIdAsync(settingId))
+            .ThrowsAsync(new Exception("Repository exception"));
 
         var settingService = new BobaSettingService(_mockSettingRepository.Object);
 
@@ -156,9 +173,21 @@ public class SettingServiceTests
     {
         return new List<BobaSetting>
         {
-            new BobaSetting { Id=1, Name="Name 1", Value= "Value 1" } ,
-            new BobaSetting { Id=2, Name="Name 2", Value= "Value 2" },
-            new BobaSetting { Id=3, Name="Name 3", Value= "Value 3" }
+            new() {
+                Id = 1,
+                Name = "Name 1",
+                Value = "Value 1"
+            },
+            new() {
+                Id = 2,
+                Name = "Name 2",
+                Value = "Value 2"
+            },
+            new() {
+                Id = 3,
+                Name = "Name 3",
+                Value = "Value 3"
+            }
         };
     }
 }

@@ -14,8 +14,7 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
 
     public virtual async Task<IList<BobaSetting>> GetAllSettingsAsync()
     {
-        var settings = await _settingRepository.GetAllAsync()
-            ?? new List<BobaSetting>();
+        var settings = await _settingRepository.GetAllAsync() ?? new List<BobaSetting>();
         return settings;
     }
 
@@ -23,12 +22,10 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
     {
         var settings = new List<BobaSettingDto>();
 
-        var storedSettings = await _settingRepository.GetAllAsync()
-            ?? new List<BobaSetting>();
+        var storedSettings = await _settingRepository.GetAllAsync() ?? new List<BobaSetting>();
 
         var appDomain = new AppDomainTypeFinder();
         var allSettingsType = appDomain.FindClassesOfType(typeof(IBobaSettings), true).ToList();
-
 
         foreach (var type in allSettingsType)
         {
@@ -47,7 +44,8 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
                     Name = prop.Name,
                     FullName = fullName,
                     Type = prop.PropertyType.Name,
-                    DefaultValue = prop.GetValue(Activator.CreateInstance(type))?.ToString() ?? "null"
+                    DefaultValue =
+                        prop.GetValue(Activator.CreateInstance(type))?.ToString() ?? "null"
                 };
 
                 var storedSetting = storedSettings.FirstOrDefault(c => c.Name == fullName);
@@ -130,13 +128,21 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
     /// <param name="keySelector">Expression specifying the property for which to get the key.</param>
     /// <returns>The key corresponding to the specified property.</returns>
     /// <exception cref="ArgumentException">Thrown when the expression does not refer to a property.</exception>
-    public virtual string GetSettingKey<TSettings, T>(TSettings settings, Expression<Func<TSettings, T>> keySelector) where TSettings : IBobaSettings, new()
+    public virtual string GetSettingKey<TSettings, T>(
+        TSettings settings,
+        Expression<Func<TSettings, T>> keySelector
+    )
+        where TSettings : IBobaSettings, new()
     {
         if (keySelector.Body is not MemberExpression member)
-            throw new ArgumentException($"Expression '{keySelector}' refers to a method, not a property.");
+            throw new ArgumentException(
+                $"Expression '{keySelector}' refers to a method, not a property."
+            );
 
         if (member.Member is not PropertyInfo propInfo)
-            throw new ArgumentException($"Expression '{keySelector}' refers to a field, not a property.");
+            throw new ArgumentException(
+                $"Expression '{keySelector}' refers to a field, not a property."
+            );
 
         var key = $"{typeof(TSettings).Name}.{propInfo.Name}";
 
@@ -148,7 +154,8 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
     /// </summary>
     /// <typeparam name="T">The type of settings to load, must implement <see cref="IBobaSettings"/> and have a parameterless constructor.</typeparam>
     /// <returns>The loaded settings.</returns>
-    public virtual async Task<T> LoadSettingAsync<T>() where T : IBobaSettings, new()
+    public virtual async Task<T> LoadSettingAsync<T>()
+        where T : IBobaSettings, new()
     {
         return (T)await LoadSettingAsync(typeof(T));
     }
@@ -180,7 +187,9 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
             if (!TypeDescriptor.GetConverter(prop.PropertyType).IsValid(setting))
                 continue;
 
-            var value = TypeDescriptor.GetConverter(prop.PropertyType).ConvertFromInvariantString(setting);
+            var value = TypeDescriptor
+                .GetConverter(prop.PropertyType)
+                .ConvertFromInvariantString(setting);
 
             //set property
             prop.SetValue(settings, value, null);
@@ -199,7 +208,8 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
     /// <remarks>
     /// This method iterates through the properties of the specified settings object, converts their values to strings, and saves them as key-value pairs.
     /// </remarks>
-    public virtual async Task SaveSettingAsync<T>(T settings) where T : IBobaSettings, new()
+    public virtual async Task SaveSettingAsync<T>(T settings)
+        where T : IBobaSettings, new()
     {
         foreach (var prop in typeof(T).GetProperties())
         {
@@ -227,14 +237,22 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
     /// <param name="settings">The settings instance.</param>
     /// <param name="keySelector">Expression specifying the property to save.</param>
     /// <exception cref="ArgumentException">Thrown when the expression does not refer to a property.</exception>
-    public virtual async Task SaveSettingAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : IBobaSettings, new()
+    public virtual async Task SaveSettingAsync<T, TPropType>(
+        T settings,
+        Expression<Func<T, TPropType>> keySelector
+    )
+        where T : IBobaSettings, new()
     {
         if (keySelector.Body is not MemberExpression member)
-            throw new ArgumentException($"Expression '{keySelector}' refers to a method, not a property.");
+            throw new ArgumentException(
+                $"Expression '{keySelector}' refers to a method, not a property."
+            );
 
         var propInfo = member.Member as PropertyInfo;
         if (propInfo is null)
-            throw new ArgumentException($"Expression '{keySelector}' refers to a field, not a property.");
+            throw new ArgumentException(
+                $"Expression '{keySelector}' refers to a field, not a property."
+            );
 
         var key = GetSettingKey(settings, keySelector);
         var value = (TPropType)propInfo.GetValue(settings, null);
@@ -303,7 +321,8 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
     /// <remarks>
     /// This method deletes all settings whose keys correspond to properties of the specified type.
     /// </remarks>
-    public virtual async Task DeleteSettingAsync<T>() where T : IBobaSettings, new()
+    public virtual async Task DeleteSettingAsync<T>()
+        where T : IBobaSettings, new()
     {
         var settingsToDelete = new List<BobaSetting>();
         var allSettings = await GetAllSettingsAsync();
@@ -311,7 +330,11 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
         foreach (var prop in typeof(T).GetProperties())
         {
             var key = typeof(T).Name + "." + prop.Name;
-            settingsToDelete.AddRange(allSettings.Where(x => x.Name.Equals(key, StringComparison.InvariantCultureIgnoreCase)));
+            settingsToDelete.AddRange(
+                allSettings.Where(x =>
+                    x.Name.Equals(key, StringComparison.InvariantCultureIgnoreCase)
+                )
+            );
         }
 
         await DeleteSettingsAsync(settingsToDelete);
@@ -324,13 +347,19 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
     /// <typeparam name="TPropType">The type of the property representing the setting.</typeparam>
     /// <param name="settings">The settings instance.</param>
     /// <param name="keySelector">Expression specifying the property of the setting to delete.</param>
-    public virtual async Task DeleteSettingAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : IBobaSettings, new()
+    public virtual async Task DeleteSettingAsync<T, TPropType>(
+        T settings,
+        Expression<Func<T, TPropType>> keySelector
+    )
+        where T : IBobaSettings, new()
     {
         var key = GetSettingKey(settings, keySelector);
         key = key.Trim().ToLowerInvariant();
 
         var allSettings = await GetAllSettingsDictionaryAsync();
-        var setting = allSettings.TryGetValue(key, out var settings_) ? settings_.FirstOrDefault() : null;
+        var setting = allSettings.TryGetValue(key, out var settings_)
+            ? settings_.FirstOrDefault()
+            : null;
 
         if (setting is null)
             return;
@@ -348,7 +377,11 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
     /// <param name="settings">The settings instance.</param>
     /// <param name="keySelector">Expression specifying the property of the setting to check.</param>
     /// <returns>True if the setting exists; otherwise, false.</returns>
-    public virtual async Task<bool> SettingExistsAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : IBobaSettings, new()
+    public virtual async Task<bool> SettingExistsAsync<T, TPropType>(
+        T settings,
+        Expression<Func<T, TPropType>> keySelector
+    )
+        where T : IBobaSettings, new()
     {
         var key = GetSettingKey(settings, keySelector);
 
@@ -372,7 +405,9 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
 
         var allSettings = await GetAllSettingsDictionaryAsync();
 
-        var setting = allSettings.TryGetValue(key, out var settings) ? settings.FirstOrDefault() : null;
+        var setting = allSettings.TryGetValue(key, out var settings)
+            ? settings.FirstOrDefault()
+            : null;
 
         if (setting is not null)
         {
@@ -384,11 +419,7 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
         else
         {
             //insert
-            var _setting = new BobaSetting
-            {
-                Name = key,
-                Value = valueStr
-            };
+            var _setting = new BobaSetting { Name = key, Value = valueStr };
             await InsertSettingAsync(_setting);
         }
     }
@@ -397,7 +428,9 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
     /// Retrieves all settings as a dictionary asynchronously, where the keys are setting names and the values are lists of settings with the same name.
     /// </summary>
     /// <returns>A dictionary containing settings grouped by their names.</returns>
-    protected virtual async Task<IDictionary<string, IList<BobaSetting>>> GetAllSettingsDictionaryAsync()
+    protected virtual async Task<
+        IDictionary<string, IList<BobaSetting>>
+    > GetAllSettingsDictionaryAsync()
     {
         var settings = await GetAllSettingsAsync();
 

@@ -86,7 +86,7 @@ public class CommonHelperTests
     public void To_InvalidConversion_ThrowsInvalidCastException()
     {
         // Arrange
-        object value = new object(); // Invalid conversion from object to int
+        object value = new(); // Invalid conversion from object to int
 
         // Act
         Action act = () => CommonHelper.To<int>(value);
@@ -94,7 +94,6 @@ public class CommonHelperTests
         // Assert
         act.Should().Throw<InvalidCastException>();
     }
-
 }
 
 public enum TestEnum

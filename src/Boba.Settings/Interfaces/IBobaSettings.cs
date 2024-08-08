@@ -3,7 +3,4 @@
 /// <summary>
 /// Setting interface
 /// </summary>
-public interface IBobaSettings
-{
-
-}
+public interface IBobaSettings { }

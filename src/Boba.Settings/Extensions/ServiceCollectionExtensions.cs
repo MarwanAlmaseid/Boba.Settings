@@ -21,10 +21,16 @@ public static class ServiceCollectionExtensions
 
         foreach (var setting in settings)
         {
-            services.AddScoped(setting, serviceProvider =>
-            {
-                return serviceProvider.GetRequiredService<IBobaSettingService>().LoadSettingAsync(setting).Result;
-            });
+            services.AddScoped(
+                setting,
+                serviceProvider =>
+                {
+                    return serviceProvider
+                        .GetRequiredService<IBobaSettingService>()
+                        .LoadSettingAsync(setting)
+                        .Result;
+                }
+            );
         }
 
         return services;
