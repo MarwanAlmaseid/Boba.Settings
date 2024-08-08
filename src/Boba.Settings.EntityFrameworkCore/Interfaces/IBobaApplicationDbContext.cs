@@ -2,7 +2,7 @@
 
 namespace Boba.Settings.EntityFrameworkCore;
 
-public interface IApplicationDbContext
+public interface IBobaApplicationDbContext
 {
     DbSet<Setting> Settings { get; }
 

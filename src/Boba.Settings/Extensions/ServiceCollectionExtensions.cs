@@ -14,16 +14,16 @@ public static class ServiceCollectionExtensions
     /// <returns>The modified <see cref="IServiceCollection"/> with added services.</returns>
     public static IServiceCollection AddBobaSettings(this IServiceCollection services)
     {
-        services.AddScoped<ISettingService, SettingService>();
+        services.AddScoped<IBobaSettingService, BobaSettingService>();
 
         var appDomain = new AppDomainTypeFinder();
-        var settings = appDomain.FindClassesOfType(typeof(ISettings), true).ToList();
+        var settings = appDomain.FindClassesOfType(typeof(IBobaSettings), true).ToList();
 
         foreach (var setting in settings)
         {
             services.AddScoped(setting, serviceProvider =>
             {
-                return serviceProvider.GetRequiredService<ISettingService>().LoadSettingAsync(setting).Result;
+                return serviceProvider.GetRequiredService<IBobaSettingService>().LoadSettingAsync(setting).Result;
             });
         }
 

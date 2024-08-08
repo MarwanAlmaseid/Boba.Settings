@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a DTO for settings.
 /// </summary>
-public class SettingDto
+public class BobaSettingDto
 {
     /// <summary>
     /// Gets or sets the unique identifier for the setting.

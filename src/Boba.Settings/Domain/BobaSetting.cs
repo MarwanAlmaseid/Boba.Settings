@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a setting
 /// </summary>
-public class Setting : BaseEntity
+public class BobaSetting : BobaBaseEntity
 {
     /// <summary>
     /// Gets or sets the setting name.

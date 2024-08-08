@@ -5,9 +5,9 @@ namespace Boba.Settings.EntityFrameworkCore;
 /// <summary>
 /// Represents a repository for managing settings in the application context.
 /// </summary>
-public partial class SettingRepository(IApplicationDbContext context) : ISettingRepository
+public partial class BobaSettingRepository(IBobaApplicationDbContext context) : ISettingRepository
 {
-    private readonly IApplicationDbContext _context = context;
+    private readonly IBobaApplicationDbContext _context = context;
 
     /// <summary>
     /// Deletes the specified setting asynchronously.

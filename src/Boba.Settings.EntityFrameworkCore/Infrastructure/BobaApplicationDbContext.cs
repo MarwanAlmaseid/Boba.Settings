@@ -3,9 +3,9 @@ using System.Reflection;
 
 namespace Boba.Settings.EntityFrameworkCore;
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class BobaApplicationDbContext : DbContext, IBobaApplicationDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+    public BobaApplicationDbContext(DbContextOptions<BobaApplicationDbContext> options) : base(options) { }
 
     public DbSet<Setting> Settings { get; set; }
 

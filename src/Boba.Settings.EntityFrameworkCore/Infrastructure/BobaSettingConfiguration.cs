@@ -6,7 +6,7 @@ namespace Boba.Settings.EntityFrameworkCore;
 /// <summary>
 /// Entity type configuration for setting.
 /// </summary>
-public class SettingConfiguration : IEntityTypeConfiguration<Setting>
+public class BobaSettingConfiguration : IEntityTypeConfiguration<Setting>
 {
     public void Configure(EntityTypeBuilder<Setting> builder)
     {

@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains constant values used throughout the application.
 /// </summary>
-public abstract class Constants
+internal abstract class Constants
 {
     /// <summary>
     /// Represents the latest schema version.

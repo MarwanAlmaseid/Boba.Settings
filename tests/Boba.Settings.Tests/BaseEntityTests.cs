@@ -46,7 +46,7 @@ public class BaseEntityTests
     }
 }
 
-public class TestEntity : BaseEntity
+public class TestEntity : BobaBaseEntity
 {
     // Additional properties or methods can be added for testing purposes
 }

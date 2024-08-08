@@ -10,10 +10,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection UseEFCore(this IServiceCollection services)
     {
         // Add the application database context and configure it to use SQL Server
-        services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+        services.AddScoped<IBobaApplicationDbContext>(provider => provider.GetRequiredService<BobaApplicationDbContext>());
 
         // Add setting repository
-        services.AddScoped<ISettingRepository, SettingRepository>();
+        services.AddScoped<ISettingRepository, BobaSettingRepository>();
 
         return services;
     }

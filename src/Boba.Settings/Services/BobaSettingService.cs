@@ -8,26 +8,26 @@ namespace Boba.Settings;
 /// <summary>
 /// Provides methods to manage settings.
 /// </summary>
-public class SettingService(ISettingRepository settingRepository) : ISettingService
+public class BobaSettingService(IBobaSettingRepository settingRepository) : IBobaSettingService
 {
-    private readonly ISettingRepository _settingRepository = settingRepository;
+    private readonly IBobaSettingRepository _settingRepository = settingRepository;
 
-    public virtual async Task<IList<Setting>> GetAllSettingsAsync()
+    public virtual async Task<IList<BobaSetting>> GetAllSettingsAsync()
     {
         var settings = await _settingRepository.GetAllAsync()
-            ?? new List<Setting>();
+            ?? new List<BobaSetting>();
         return settings;
     }
 
-    public virtual async Task<IList<SettingDto>> GetAllRegisteredSettingsAsync()
+    public virtual async Task<IList<BobaSettingDto>> GetAllRegisteredSettingsAsync()
     {
-        var settings = new List<SettingDto>();
+        var settings = new List<BobaSettingDto>();
 
         var storedSettings = await _settingRepository.GetAllAsync()
-            ?? new List<Setting>();
+            ?? new List<BobaSetting>();
 
         var appDomain = new AppDomainTypeFinder();
-        var allSettingsType = appDomain.FindClassesOfType(typeof(ISettings), true).ToList();
+        var allSettingsType = appDomain.FindClassesOfType(typeof(IBobaSettings), true).ToList();
 
 
         foreach (var type in allSettingsType)
@@ -41,7 +41,7 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
             {
                 var fullName = $"{groupName.ToLower()}.{prop.Name.ToLower()}";
 
-                var setting = new SettingDto
+                var setting = new BobaSettingDto
                 {
                     GroupName = groupName,
                     Name = prop.Name,
@@ -70,7 +70,7 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// </summary>
     /// <param name="settingId">The ID of the setting to retrieve.</param>
     /// <returns>The setting with the specified ID.</returns>
-    public virtual async Task<Setting> GetSettingByIdAsync(int settingId)
+    public virtual async Task<BobaSetting> GetSettingByIdAsync(int settingId)
     {
         return await _settingRepository.GetByIdAsync(settingId);
     }
@@ -105,7 +105,7 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// </summary>
     /// <param name="key">The key of the setting to retrieve.</param>
     /// <returns>The setting corresponding to the specified key, or null if not found.</returns>
-    public virtual async Task<Setting> GetSettingAsync(string key)
+    public virtual async Task<BobaSetting> GetSettingAsync(string key)
     {
         if (string.IsNullOrEmpty(key))
             return null!;
@@ -130,7 +130,7 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// <param name="keySelector">Expression specifying the property for which to get the key.</param>
     /// <returns>The key corresponding to the specified property.</returns>
     /// <exception cref="ArgumentException">Thrown when the expression does not refer to a property.</exception>
-    public virtual string GetSettingKey<TSettings, T>(TSettings settings, Expression<Func<TSettings, T>> keySelector) where TSettings : ISettings, new()
+    public virtual string GetSettingKey<TSettings, T>(TSettings settings, Expression<Func<TSettings, T>> keySelector) where TSettings : IBobaSettings, new()
     {
         if (keySelector.Body is not MemberExpression member)
             throw new ArgumentException($"Expression '{keySelector}' refers to a method, not a property.");
@@ -146,9 +146,9 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// <summary>
     /// Loads settings of the specified type asynchronously.
     /// </summary>
-    /// <typeparam name="T">The type of settings to load, must implement <see cref="ISettings"/> and have a parameterless constructor.</typeparam>
+    /// <typeparam name="T">The type of settings to load, must implement <see cref="IBobaSettings"/> and have a parameterless constructor.</typeparam>
     /// <returns>The loaded settings.</returns>
-    public virtual async Task<T> LoadSettingAsync<T>() where T : ISettings, new()
+    public virtual async Task<T> LoadSettingAsync<T>() where T : IBobaSettings, new()
     {
         return (T)await LoadSettingAsync(typeof(T));
     }
@@ -158,7 +158,7 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// </summary>
     /// <param name="type">The type of settings to load.</param>
     /// <returns>The loaded settings.</returns>
-    public virtual async Task<ISettings> LoadSettingAsync(Type type)
+    public virtual async Task<IBobaSettings> LoadSettingAsync(Type type)
     {
         var settings = Activator.CreateInstance(type);
 
@@ -187,19 +187,19 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
         }
 
 #pragma warning disable CS8603 // Possible null reference return.
-        return settings! as ISettings;
+        return settings! as IBobaSettings;
 #pragma warning restore CS8603 // Possible null reference return.
     }
 
     /// <summary>
     /// Saves the specified settings asynchronously.
     /// </summary>
-    /// <typeparam name="T">The type of settings to save, must implement <see cref="ISettings"/> and have a parameterless constructor.</typeparam>
+    /// <typeparam name="T">The type of settings to save, must implement <see cref="IBobaSettings"/> and have a parameterless constructor.</typeparam>
     /// <param name="settings">The settings to save.</param>
     /// <remarks>
     /// This method iterates through the properties of the specified settings object, converts their values to strings, and saves them as key-value pairs.
     /// </remarks>
-    public virtual async Task SaveSettingAsync<T>(T settings) where T : ISettings, new()
+    public virtual async Task SaveSettingAsync<T>(T settings) where T : IBobaSettings, new()
     {
         foreach (var prop in typeof(T).GetProperties())
         {
@@ -222,12 +222,12 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// <summary>
     /// Saves the specified setting asynchronously.
     /// </summary>
-    /// <typeparam name="T">The type of settings to save, must implement <see cref="ISettings"/> and have a parameterless constructor.</typeparam>
+    /// <typeparam name="T">The type of settings to save, must implement <see cref="IBobaSettings"/> and have a parameterless constructor.</typeparam>
     /// <typeparam name="TPropType">The type of the property to save.</typeparam>
     /// <param name="settings">The settings instance.</param>
     /// <param name="keySelector">Expression specifying the property to save.</param>
     /// <exception cref="ArgumentException">Thrown when the expression does not refer to a property.</exception>
-    public virtual async Task SaveSettingAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : ISettings, new()
+    public virtual async Task SaveSettingAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : IBobaSettings, new()
     {
         if (keySelector.Body is not MemberExpression member)
             throw new ArgumentException($"Expression '{keySelector}' refers to a method, not a property.");
@@ -260,7 +260,7 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// Inserts a new setting asynchronously.
     /// </summary>
     /// <param name="setting">The setting to insert.</param>
-    public virtual async Task InsertSettingAsync(Setting setting)
+    public virtual async Task InsertSettingAsync(BobaSetting setting)
     {
         await _settingRepository.InsertAsync(setting);
     }
@@ -270,7 +270,7 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// </summary>
     /// <param name="setting">The setting to update.</param>
     /// <exception cref="ArgumentNullException">Thrown when the setting is null.</exception>
-    public virtual async Task UpdateSettingAsync(Setting setting)
+    public virtual async Task UpdateSettingAsync(BobaSetting setting)
     {
         if (setting == null)
             throw new ArgumentNullException(nameof(setting));
@@ -282,7 +282,7 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// Deletes a setting asynchronously.
     /// </summary>
     /// <param name="setting">The setting to delete.</param>
-    public virtual async Task DeleteSettingAsync(Setting setting)
+    public virtual async Task DeleteSettingAsync(BobaSetting setting)
     {
         await _settingRepository.DeleteAsync(setting);
     }
@@ -291,7 +291,7 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// Deletes multiple settings asynchronously.
     /// </summary>
     /// <param name="settings">The list of settings to delete.</param>
-    public virtual async Task DeleteSettingsAsync(IList<Setting> settings)
+    public virtual async Task DeleteSettingsAsync(IList<BobaSetting> settings)
     {
         await _settingRepository.DeleteAsync(settings);
     }
@@ -299,13 +299,13 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// <summary>
     /// Deletes all settings of the specified type asynchronously.
     /// </summary>
-    /// <typeparam name="T">The type of settings to delete, must implement <see cref="ISettings"/> and have a parameterless constructor.</typeparam>
+    /// <typeparam name="T">The type of settings to delete, must implement <see cref="IBobaSettings"/> and have a parameterless constructor.</typeparam>
     /// <remarks>
     /// This method deletes all settings whose keys correspond to properties of the specified type.
     /// </remarks>
-    public virtual async Task DeleteSettingAsync<T>() where T : ISettings, new()
+    public virtual async Task DeleteSettingAsync<T>() where T : IBobaSettings, new()
     {
-        var settingsToDelete = new List<Setting>();
+        var settingsToDelete = new List<BobaSetting>();
         var allSettings = await GetAllSettingsAsync();
 
         foreach (var prop in typeof(T).GetProperties())
@@ -320,11 +320,11 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// <summary>
     /// Deletes the specified setting asynchronously.
     /// </summary>
-    /// <typeparam name="T">The type of settings to which the setting belongs, must implement <see cref="ISettings"/> and have a parameterless constructor.</typeparam>
+    /// <typeparam name="T">The type of settings to which the setting belongs, must implement <see cref="IBobaSettings"/> and have a parameterless constructor.</typeparam>
     /// <typeparam name="TPropType">The type of the property representing the setting.</typeparam>
     /// <param name="settings">The settings instance.</param>
     /// <param name="keySelector">Expression specifying the property of the setting to delete.</param>
-    public virtual async Task DeleteSettingAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : ISettings, new()
+    public virtual async Task DeleteSettingAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : IBobaSettings, new()
     {
         var key = GetSettingKey(settings, keySelector);
         key = key.Trim().ToLowerInvariant();
@@ -343,12 +343,12 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// <summary>
     /// Checks if the specified setting exists asynchronously.
     /// </summary>
-    /// <typeparam name="T">The type of settings to which the setting belongs, must implement <see cref="ISettings"/> and have a parameterless constructor.</typeparam>
+    /// <typeparam name="T">The type of settings to which the setting belongs, must implement <see cref="IBobaSettings"/> and have a parameterless constructor.</typeparam>
     /// <typeparam name="TPropType">The type of the property representing the setting.</typeparam>
     /// <param name="settings">The settings instance.</param>
     /// <param name="keySelector">Expression specifying the property of the setting to check.</param>
     /// <returns>True if the setting exists; otherwise, false.</returns>
-    public virtual async Task<bool> SettingExistsAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : ISettings, new()
+    public virtual async Task<bool> SettingExistsAsync<T, TPropType>(T settings, Expression<Func<T, TPropType>> keySelector) where T : IBobaSettings, new()
     {
         var key = GetSettingKey(settings, keySelector);
 
@@ -384,7 +384,7 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
         else
         {
             //insert
-            var _setting = new Setting
+            var _setting = new BobaSetting
             {
                 Name = key,
                 Value = valueStr
@@ -397,16 +397,16 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
     /// Retrieves all settings as a dictionary asynchronously, where the keys are setting names and the values are lists of settings with the same name.
     /// </summary>
     /// <returns>A dictionary containing settings grouped by their names.</returns>
-    protected virtual async Task<IDictionary<string, IList<Setting>>> GetAllSettingsDictionaryAsync()
+    protected virtual async Task<IDictionary<string, IList<BobaSetting>>> GetAllSettingsDictionaryAsync()
     {
         var settings = await GetAllSettingsAsync();
 
-        var dictionary = new Dictionary<string, IList<Setting>>();
+        var dictionary = new Dictionary<string, IList<BobaSetting>>();
         foreach (var s in settings)
         {
             var resourceName = s.Name.ToLowerInvariant();
 
-            var settingForCaching = new Setting
+            var settingForCaching = new BobaSetting
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -415,7 +415,7 @@ public class SettingService(ISettingRepository settingRepository) : ISettingServ
 
             if (!dictionary.ContainsKey(resourceName))
                 //first setting
-                dictionary.Add(resourceName, new List<Setting> { settingForCaching });
+                dictionary.Add(resourceName, new List<BobaSetting> { settingForCaching });
             else
                 //already added
                 dictionary[resourceName].Add(settingForCaching);
