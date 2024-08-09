@@ -6,11 +6,11 @@ namespace Boba.Settings.EntityFrameworkCore;
 /// <summary>
 /// Entity type configuration for setting.
 /// </summary>
-public class BobaSettingConfiguration : IEntityTypeConfiguration<Setting>
+public class BobaSettingConfiguration : IEntityTypeConfiguration<BobaSetting>
 {
-    public void Configure(EntityTypeBuilder<Setting> builder)
+    public void Configure(EntityTypeBuilder<BobaSetting> builder)
     {
-        builder.ToTable(nameof(Setting), Constants.SchemaName);
+        builder.ToTable(nameof(BobaSetting), Constants.SchemaName);
 
         builder.HasKey(x => x.Id);
         builder.Property(e => e.Name).HasMaxLength(512).IsRequired();

@@ -5,7 +5,7 @@ namespace Boba.Settings.EntityFrameworkCore;
 /// <summary>
 /// Represents a repository for managing settings in the application context.
 /// </summary>
-public partial class BobaSettingRepository(IBobaApplicationDbContext context) : ISettingRepository
+public partial class BobaSettingRepository(IBobaApplicationDbContext context) : IBobaSettingRepository
 {
     private readonly IBobaApplicationDbContext _context = context;
 
@@ -14,7 +14,7 @@ public partial class BobaSettingRepository(IBobaApplicationDbContext context) : 
     /// </summary>
     /// <param name="setting">The setting to delete.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
-    public virtual async Task DeleteAsync(Setting setting)
+    public virtual async Task DeleteAsync(BobaSetting setting)
     {
         _context.Settings.Remove(setting);
 
@@ -26,7 +26,7 @@ public partial class BobaSettingRepository(IBobaApplicationDbContext context) : 
     /// </summary>
     /// <param name="settings">The list of settings to delete.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
-    public async Task DeleteAsync(IList<Setting> settings)
+    public async Task DeleteAsync(IList<BobaSetting> settings)
     {
         _context.Settings.RemoveRange(settings);
 
@@ -53,7 +53,7 @@ public partial class BobaSettingRepository(IBobaApplicationDbContext context) : 
     /// Retrieves all settings asynchronously.
     /// </summary>
     /// <returns>A task representing the asynchronous operation that returns a list of all settings.</returns>
-    public virtual async Task<IList<Setting>> GetAllAsync()
+    public virtual async Task<IList<BobaSetting>> GetAllAsync()
     {
         return await _context.Settings.ToListAsync();
     }
@@ -63,7 +63,7 @@ public partial class BobaSettingRepository(IBobaApplicationDbContext context) : 
     /// </summary>
     /// <param name="id">The ID of the setting to retrieve.</param>
     /// <returns>A task representing the asynchronous operation that returns the setting with the specified ID, or null if not found.</returns>
-    public virtual async Task<Setting> GetByIdAsync(int id)
+    public virtual async Task<BobaSetting> GetByIdAsync(int id)
     {
         return await _context.Settings.FirstOrDefaultAsync(s => s.Id == id);
     }
@@ -73,7 +73,7 @@ public partial class BobaSettingRepository(IBobaApplicationDbContext context) : 
     /// </summary>
     /// <param name="ids">The list of IDs of the settings to retrieve.</param>
     /// <returns>A task representing the asynchronous operation that returns a list of settings with the specified IDs.</returns>
-    public virtual async Task<IList<Setting>> GetByIdsAsync(IList<int> ids)
+    public virtual async Task<IList<BobaSetting>> GetByIdsAsync(IList<int> ids)
     {
         return await _context.Settings.Where(s => ids.Any(id => id == s.Id)).ToListAsync();
     }
@@ -83,7 +83,7 @@ public partial class BobaSettingRepository(IBobaApplicationDbContext context) : 
     /// </summary>
     /// <param name="name">The key of the settings to retrieve.</param>
     /// <returns>A task representing the asynchronous operation that returns a list of settings with the specified key.</returns>
-    public virtual async Task<IList<Setting>> GetByKeyAsync(string name)
+    public virtual async Task<IList<BobaSetting>> GetByKeyAsync(string name)
     {
         return await _context.Settings.Where(s => s.Name == name).ToListAsync();
     }
@@ -93,7 +93,7 @@ public partial class BobaSettingRepository(IBobaApplicationDbContext context) : 
     /// </summary>
     /// <param name="value">The value of the settings to retrieve.</param>
     /// <returns>A task representing the asynchronous operation that returns a list of settings with the specified value.</returns>
-    public virtual async Task<IList<Setting>> GetByValueAsync(string value)
+    public virtual async Task<IList<BobaSetting>> GetByValueAsync(string value)
     {
         return await _context.Settings.Where(s => s.Value == value).ToListAsync();
     }
@@ -103,7 +103,7 @@ public partial class BobaSettingRepository(IBobaApplicationDbContext context) : 
     /// </summary>
     /// <param name="setting">The setting to insert.</param>
     /// <returns>A task representing the asynchronous operation that returns the inserted setting.</returns>
-    public virtual async Task<Setting> InsertAsync(Setting setting)
+    public virtual async Task<BobaSetting> InsertAsync(BobaSetting setting)
     {
         await _context.Settings.AddAsync(setting);
         await _context.SaveChangesAsync(default);
@@ -116,7 +116,7 @@ public partial class BobaSettingRepository(IBobaApplicationDbContext context) : 
     /// </summary>
     /// <param name="settings">The list of settings to insert.</param>
     /// <returns>A task representing the asynchronous operation that returns the list of inserted settings.</returns>
-    public virtual async Task<IList<Setting>> InsertBulkAsync(List<Setting> settings)
+    public virtual async Task<IList<BobaSetting>> InsertBulkAsync(List<BobaSetting> settings)
     {
         await _context.Settings.AddRangeAsync(settings);
         await _context.SaveChangesAsync(default);
@@ -129,7 +129,7 @@ public partial class BobaSettingRepository(IBobaApplicationDbContext context) : 
     /// </summary>
     /// <param name="setting">The setting to update.</param>
     /// <returns>A task representing the asynchronous operation that returns the updated setting.</returns>
-    public virtual async Task<Setting> UpdateAsync(Setting setting)
+    public virtual async Task<BobaSetting> UpdateAsync(BobaSetting setting)
     {
         _context.Settings.Update(setting);
         await _context.SaveChangesAsync(default);

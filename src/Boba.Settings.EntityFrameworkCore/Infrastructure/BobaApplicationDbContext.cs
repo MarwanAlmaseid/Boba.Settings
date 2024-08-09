@@ -8,7 +8,7 @@ public class BobaApplicationDbContext : DbContext, IBobaApplicationDbContext
     public BobaApplicationDbContext(DbContextOptions<BobaApplicationDbContext> options)
         : base(options) { }
 
-    public DbSet<Setting> Settings { get; set; }
+    public DbSet<BobaSetting> Settings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

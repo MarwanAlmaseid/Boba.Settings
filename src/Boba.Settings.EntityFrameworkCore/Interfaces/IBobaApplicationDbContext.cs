@@ -4,7 +4,7 @@ namespace Boba.Settings.EntityFrameworkCore;
 
 public interface IBobaApplicationDbContext
 {
-    DbSet<Setting> Settings { get; }
+    DbSet<BobaSetting> Settings { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

@@ -22,7 +22,7 @@ public static class ServiceCollectionExtensions
     {
         services.UseEFCore();
 
-        services.AddDbContext<ApplicationDbContext>(option =>
+        services.AddDbContext<BobaApplicationDbContext>(option =>
         {
             option.UseInMemoryDatabase(dbName ?? defaultDBName);
         });

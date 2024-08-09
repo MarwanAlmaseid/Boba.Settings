@@ -13,7 +13,7 @@ public static class ServiceCollectionExtensions
         );
 
         // Add setting repository
-        services.AddScoped<ISettingRepository, BobaSettingRepository>();
+        services.AddScoped<IBobaSettingRepository, BobaSettingRepository>();
 
         return services;
     }

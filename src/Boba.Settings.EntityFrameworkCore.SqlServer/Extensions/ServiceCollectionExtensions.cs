@@ -27,7 +27,7 @@ public static class ServiceCollectionExtensions
 
         services.UseEFCore();
 
-        services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddDbContext<BobaApplicationDbContext>(options =>
             options.UseSqlServer(connectionString)
         );
 
