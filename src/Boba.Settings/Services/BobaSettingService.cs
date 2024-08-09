@@ -37,6 +37,7 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
             foreach (var prop in properties)
             {
                 var fullName = $"{groupName.ToLower()}.{prop.Name.ToLower()}";
+                var defaultValue = prop.GetValue(Activator.CreateInstance(type))?.ToString() ?? "null";
 
                 var setting = new BobaSettingDto
                 {
@@ -44,8 +45,7 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
                     Name = prop.Name,
                     FullName = fullName,
                     Type = prop.PropertyType.Name,
-                    DefaultValue =
-                        prop.GetValue(Activator.CreateInstance(type))?.ToString() ?? "null"
+                    DefaultValue = defaultValue
                 };
 
                 var storedSetting = storedSettings.FirstOrDefault(c => c.Name == fullName);
@@ -413,7 +413,7 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
         {
             //update
             var _setting = await GetSettingByIdAsync(setting.Id);
-            setting.Value = valueStr;
+            _setting.Value = valueStr;
             await UpdateSettingAsync(_setting);
         }
         else
