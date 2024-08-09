@@ -13,7 +13,7 @@ ELSE
     PRINT 'Database schema [$(BobaSchema)] already exists';
 
 
-IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$(BobaSchema)' AND TABLE_NAME = 'Setting')
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$(BobaSchema)' AND TABLE_NAME = 'BobaSetting')
 BEGIN
     EXEC('CREATE TABLE $(BobaSchema).Setting
 	(
