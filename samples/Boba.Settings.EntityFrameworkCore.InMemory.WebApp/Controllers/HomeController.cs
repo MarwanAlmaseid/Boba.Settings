@@ -8,12 +8,12 @@ namespace Boba.Settings.EntityFrameworkCore.InMemory.WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly TestSettings _testSettings;
-        private readonly ISettingService _settingService;
+        private readonly IBobaSettingService _settingService;
 
         public HomeController(
             ILogger<HomeController> logger,
             TestSettings testSettings,
-            ISettingService settingService
+            IBobaSettingService settingService
         )
         {
             _logger = logger;
@@ -21,15 +21,25 @@ namespace Boba.Settings.EntityFrameworkCore.InMemory.WebApp.Controllers
             _settingService = settingService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var allSettings = await _settingService.GetAllRegisteredSettingsAsync();
             return View(_testSettings);
         }
 
         public async Task<IActionResult> Create()
         {
             await _settingService.SaveSettingAsync(
-                new TestSettings { DefaultLangId = 1, Enabled = false }
+                new TestSettings { DefaultLangId = 1, Enabled = false, DefaultColor = "Blue" }
+            );
+
+            return View();
+        }
+
+        public async Task<IActionResult> Update()
+        {
+            await _settingService.SaveSettingAsync(
+                new TestSettings { DefaultLangId = 2, Enabled = true, DefaultColor = "Green" }
             );
 
             return View();
