@@ -8,12 +8,12 @@ namespace Boba.Settings.EntityFrameworkCore.SqlServer.WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly TestSettings _testSettings;
-        private readonly ISettingService _settingService;
+        private readonly IBobaSettingService _settingService;
 
         public HomeController(
             ILogger<HomeController> logger,
             TestSettings testSettings,
-            ISettingService settingService
+            IBobaSettingService settingService
         )
         {
             _logger = logger;

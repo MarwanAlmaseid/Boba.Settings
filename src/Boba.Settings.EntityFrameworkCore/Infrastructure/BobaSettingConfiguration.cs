@@ -10,7 +10,7 @@ public class BobaSettingConfiguration : IEntityTypeConfiguration<BobaSetting>
 {
     public void Configure(EntityTypeBuilder<BobaSetting> builder)
     {
-        builder.ToTable(nameof(BobaSetting), Constants.SchemaName);
+        builder.ToTable("Setting", Constants.SchemaName);
 
         builder.HasKey(x => x.Id);
         builder.Property(e => e.Name).HasMaxLength(512).IsRequired();
