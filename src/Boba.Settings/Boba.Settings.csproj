@@ -13,7 +13,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>Settings, Configurations, Options, App settings, Asp.net core, Entity Framework, EntityFrameworkCore, EFCore, InMemory, MsSql Server</PackageTags>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
