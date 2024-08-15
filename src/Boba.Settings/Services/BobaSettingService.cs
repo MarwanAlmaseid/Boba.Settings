@@ -1,4 +1,5 @@
-﻿using Boba.Settings.Models;
+﻿using Boba.Settings.Attributes;
+using Boba.Settings.Models;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -18,6 +19,10 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
         return settings;
     }
 
+    /// <summary>
+    /// Asynchronously retrieves all registered settings as a list of <see cref="BobaSettingDto"/> objects.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a list of <see cref="BobaSettingDto"/> objects.</returns>
     public virtual async Task<IList<BobaSettingDto>> GetAllRegisteredSettingsAsync()
     {
         var settings = new List<BobaSettingDto>();
@@ -27,12 +32,17 @@ public class BobaSettingService(IBobaSettingRepository settingRepository) : IBob
         var appDomain = new AppDomainTypeFinder();
         var allSettingsType = appDomain.FindClassesOfType(typeof(IBobaSettings), true).ToList();
 
-        foreach (var type in allSettingsType)
+        var orderedSettingsType = allSettingsType
+            .OrderBy(t => t.GetCustomAttribute<BobaSettingsDisplayOrderAttribute>()?.Order ?? int.MaxValue)
+            .ToList();
+
+        foreach (var type in orderedSettingsType)
         {
             var groupName = type.Name;
 
-            // Get all properties of the type
-            var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .OrderBy(p => p.GetCustomAttribute<BobaPropertyDisplayOrderAttribute>()?.Order ?? int.MaxValue)
+                .ToList();
 
             foreach (var prop in properties)
             {
